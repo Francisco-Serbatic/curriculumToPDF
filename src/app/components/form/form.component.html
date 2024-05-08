@@ -1,0 +1,146 @@
+<form [formGroup]="cvForm" *ngIf="loaded">
+    <fieldset class="personal">
+        <legend>{{ "Personales" | translate }}</legend>
+
+        <mat-form-field>
+            <mat-label>{{ "Nombre" | translate }}</mat-label>
+            <input matInput formControlName="firstName">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Apellido1" | translate }}</mat-label>
+            <input matInput formControlName="surname1">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Apellido2" | translate }}</mat-label>
+            <input matInput formControlName="surname2">
+        </mat-form-field>
+
+    </fieldset>
+    <fieldset class="proffesional">
+        <legend>{{ "Profesionales" | translate }}</legend>
+
+        <mat-form-field>
+            <mat-label>{{ "Consejo" | translate }}</mat-label>
+            <input matInput formControlName="board">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Clan" | translate }}</mat-label>
+            <input matInput formControlName="clan">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Oficina" | translate }}</mat-label>
+            <input matInput formControlName="office">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Puesto" | translate }}</mat-label>
+            <input matInput formControlName="position">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "AltaProfesional" | translate }}</mat-label>
+            <input matInput formControlName="professionalStart">
+        </mat-form-field>
+
+    </fieldset>
+
+    <fieldset>
+        <legend>{{ "VASS" | translate}}</legend>
+
+        <div formArrayName="vassSection">
+            <div *ngFor="let item of sectionArray.controls; let i=index" [formGroupName]="i" class="vass">
+                <mat-form-field>
+                    <mat-label>{{ "FechaInicio" | translate }}</mat-label>
+                    <input matInput formControlName="vassStart">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ "FechaFin" | translate }}</mat-label>
+                    <input matInput formControlName="vassEnd">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ "Puesto" | translate }}</mat-label>
+                    <input matInput formControlName="vassPossition">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ "OtroPuesto" | translate }}</mat-label>
+                    <input matInput formControlName="vassOtherPossition">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ "Cliente" | translate }}</mat-label>
+                    <input matInput formControlName="client">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ "Proyecto" | translate }}</mat-label>
+                    <input matInput formControlName="project">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>{{ "Descripcion" | translate }}</mat-label>
+                    <textarea matInput formControlName="description"></textarea>
+                </mat-form-field>
+
+                <button mat-icon-button color="warn" (click)="removeVassSection(i)">
+                    <mat-icon aria-label="Remove">delete</mat-icon>
+                </button>
+
+            </div>
+        </div>
+        <button mat-icon-button (click)="addVassSection()">
+            <mat-icon aria-label="Add">add</mat-icon>
+        </button>
+    </fieldset>
+
+    <fieldset class="academic">
+        <legend>{{ "FormacionAcademica" | translate }}</legend>
+
+        <mat-form-field>
+            <mat-label>{{ "Titulacion" | translate }}</mat-label>
+            <input matInput formControlName="degree">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "TipoTitulacion" | translate }}</mat-label>
+            <input matInput formControlName="typeDegree">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "FechaInicio" | translate }}</mat-label>
+            <input matInput formControlName="academicStart">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "FechaFin" | translate }}</mat-label>
+            <input matInput formControlName="academicEnd">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Centro" | translate }}</mat-label>
+            <input matInput formControlName="institution">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Idiomas" | translate }}</mat-label>
+            <textarea matInput formControlName="languages"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "ConocimientosTecnológicos" | translate }}</mat-label>
+            <textarea matInput formControlName="skills"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>{{ "Certificaciones" | translate }}</mat-label>
+            <textarea matInput formControlName="certifications"></textarea>
+        </mat-form-field>
+    </fieldset>
+    <button mat-raised-button color="primary" (click)="exportToPDF()">{{ "Enviar" | translate }}</button>
+</form>
