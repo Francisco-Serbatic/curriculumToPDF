@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-app-home-page, app-form{
-    width: 100%;
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
+.hflexcenter {display: flex; align-items: center; justify-items: center;}
+
+label {
+    font-size: 15px;
+    height: 45px;
+    font-family: "Nunito Sans", sans-serif;
+    min-width: 120px;
 }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

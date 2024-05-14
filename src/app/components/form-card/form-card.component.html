@@ -1,0 +1,25 @@
+
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{titles}}
+            </mat-panel-title>
+            <mat-panel-description>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <form [formGroup]="myForm" style="position: relative;">
+            <mat-grid-list cols="2" rowHeight="100px" formArrayName="groupArray" class="hflexcenter">
+                <mat-grid-tile *ngFor="let input of groupArrayControls; let i = index" [formGroupName]="i"
+                    class="tasks-container">
+                    <label>{{formData[ubicator(i)]}}</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Placeholder" #inputs formControlName="input" >
+                        <mat-icon matSuffix>delete</mat-icon>
+                    </mat-form-field>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </form>
+        <div *ngIf="ampliable" style="display: flex; justify-content: center;">
+            <button type="button" mat-raised-button (click)="setInputs()">Añadir</button>
+        </div>
+    </mat-expansion-panel>

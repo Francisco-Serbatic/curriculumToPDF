@@ -1,45 +1,48 @@
+import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// Angular Material
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatButtonModule} from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatDividerModule} from '@angular/material/divider';
 
-import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormComponent } from './components/form/form.component';
-import { MaterialModule } from './modules/material/material.module';
-import { HomePageComponent } from './components/pages/home-page/home-page.component';
-import { LanguageSwitcherComponent } from './components/language-switcher/language-switcher.component';
+import { FormCardComponent } from './components/form-card/form-card.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MainPageComponent } from './pages/main-page/main-page.component';
+import { PdfComponent } from './components/pdf/pdf.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FormComponent,
-    HomePageComponent,
-    LanguageSwitcherComponent
+    FormCardComponent,
+    HeaderComponent,
+    MainPageComponent,
+    PdfComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoader,
-        deps: [HttpClient]
-      }
-    }),
-
+    FormsModule, 
+    ReactiveFormsModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-export function HttpLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, "./assets/languages/", ".json");
-}
