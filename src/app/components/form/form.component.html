@@ -1,3 +1,5 @@
+<h1><img src="assets/img/serbatic.png" alt="logo"> <span class="montez-regular">Curriculum Vitae</span></h1>
+
 <form [formGroup]="cvForm" *ngIf="loaded">
     <fieldset class="personal">
         <legend>{{ "Personales" | translate }}</legend>
@@ -83,9 +85,9 @@
                     <input matInput formControlName="project">
                 </mat-form-field>
 
-                <mat-form-field>
+                <mat-form-field class="span">
                     <mat-label>{{ "Descripcion" | translate }}</mat-label>
-                    <textarea matInput formControlName="description"></textarea>
+                    <textarea matInput formControlName="description" rows="5"></textarea>
                 </mat-form-field>
 
                 <button mat-icon-button color="warn" (click)="removeVassSection(i)">
@@ -132,14 +134,14 @@
             <textarea matInput formControlName="languages"></textarea>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="span">
             <mat-label>{{ "ConocimientosTecnológicos" | translate }}</mat-label>
-            <textarea matInput formControlName="skills"></textarea>
+            <textarea matInput formControlName="skills" rows="5"></textarea>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="span">
             <mat-label>{{ "Certificaciones" | translate }}</mat-label>
-            <textarea matInput formControlName="certifications"></textarea>
+            <textarea matInput formControlName="certifications" rows="5"></textarea>
         </mat-form-field>
     </fieldset>
     <button mat-raised-button color="primary" (click)="exportToPDF()">{{ "Enviar" | translate }}</button>
