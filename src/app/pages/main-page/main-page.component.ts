@@ -53,6 +53,8 @@ export class MainPageComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private pdfGenerator: PdfCreatorService) { }
 
+  // todo: Poner datos clave bien.
+
   enviarEvento() {
     this.datosDesdeElPadre.forEach((value, index) => {
       this.formData[index].responses = value.cositas();

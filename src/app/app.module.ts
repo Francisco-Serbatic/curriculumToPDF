@@ -18,15 +18,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormCardComponent } from './components/form-card/form-card.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
-import { PdfComponent } from './components/pdf/pdf.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormCardComponent,
     HeaderComponent,
-    MainPageComponent,
-    PdfComponent
+    MainPageComponent
   ],
   imports: [
     BrowserModule,

@@ -33,11 +33,11 @@ export class FormCardComponent implements OnInit {
   setInputs() {
     for (let form in this.formData)
       {
-        this.addNewInput(false)
+        this.addNewInput()
       }
   }
 
-  addNewInput(separator: boolean) {
+  addNewInput() {
     var inputsArray = (this.myForm.get('groupArray') as FormArray);
     const newGroup = new FormGroup({
       input: new FormControl('')

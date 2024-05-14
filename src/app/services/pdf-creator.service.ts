@@ -11,6 +11,8 @@ export class PdfCreatorService {
 
   constructor() { }
 
+  // todo: Poner en tabla para que se vea decente
+
   createpdf(arrayData: DatosImpl[]) {
     var content: any[] = []
     arrayData.forEach((datosImpl) => {
