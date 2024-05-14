@@ -1,17 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .montez-regular {
-    font-family: "Montez", cursive;
-    font-weight: bold;
-    font-style: normal;
-  }
+  font-family: "Montez", cursive;
+  font-weight: bold;
+  font-style: normal;
+}
 
-app-home-page, app-form{
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
+app-home-page,
+app-form {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+app-language-switcher {
+  margin-right: 5%;
+  margin-left: auto;
 }
