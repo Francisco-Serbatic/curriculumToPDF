@@ -72,6 +72,7 @@ export class MainPageComponent implements OnInit {
 
   mostrarDatos() {
     this.pdfGenerator.createpdf(this.formData);
+    // this.pdfGenerator.createpdf1()
   }
 
 }

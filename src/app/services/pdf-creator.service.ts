@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DatosImpl } from '../models/datos';
+import { Table } from '../models/table';
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 @Injectable({
@@ -14,19 +15,27 @@ export class PdfCreatorService {
   // todo: Poner en tabla para que se vea decente
 
   createpdf(arrayData: DatosImpl[]) {
-    var content: any[] = []
+    var content: any = []
+
     arrayData.forEach((datosImpl) => {
-      content.push(this.createContentObject(datosImpl.title, "header"))
+      var table = new Table();
+      content.push(this.generatePdfText(datosImpl.header, "header"))
+
       datosImpl.responses.forEach((response, index) => {
+        let row = []
         let titleIndex = index;
-        while (titleIndex >= datosImpl.data.length) {
-          titleIndex = titleIndex - datosImpl.data.length;
+        while (titleIndex >= datosImpl.titles.length) {
+          titleIndex = titleIndex - datosImpl.titles.length;
         }
-        content.push(this.createContentObject(datosImpl.data[titleIndex], "catalog"));
-        content.push(this.createContentObject(response, "text"));
+        row.push(this.generatePdfText(datosImpl.titles[titleIndex], "catalog"));
+        row.push(this.generatePdfText(response, "text"))
+        table.body.push(row)
       })
-      content.push(" ", " ")
+      content.push({table, layout: 'noBorders'})
+      content.push({ text: " " })
     })
+    console.log(content)
+
 
     const pdfDefinition: any = {
       content: content,
@@ -49,7 +58,7 @@ export class PdfCreatorService {
     pdf.open();
   }
 
-  private createContentObject(text: string, style: string): any {
+  private generatePdfText(text: string, style: string): any {
     return {
       text: text, style: style
     }
@@ -61,12 +70,11 @@ export class PdfCreatorService {
         {
           table: {
             body: [
+              [{ text: "ojete", style: "ojal" }, "hola", "ashdosda"],
               ["hola", "hola", "ashdosda"],
               ["hola", "hola", "ashdosda"],
               ["hola", "hola", "ashdosda"],
               ["hola", "hola", "ashdosda"],
-              ["hola", "hola", "ashdosda"],
-
             ]
           }
         }

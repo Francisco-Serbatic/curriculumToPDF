@@ -1,12 +1,12 @@
 export interface Datos {
-  title: string;
-  data: string[];
+  header: string;
+  titles: string[];
   responses: string[]
   ampliable?: boolean;
 }
 
 export class DatosImpl implements Datos {
-  constructor(public title: string, public data: string[], public responses: string[], public ampliable: boolean) { }
+  constructor(public header: string, public titles: string[], public responses: string[], public ampliable: boolean) { }
 
   static crearDatos(title: string, data: string[], ampliable: boolean): DatosImpl {
     var responses: string[] = [];

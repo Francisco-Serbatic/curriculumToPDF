@@ -1,21 +1,22 @@
 <app-header></app-header>
-<br><br><br>
-<form [formGroup]="myForm">
-    <div class="mainData">
-        <label>Nombre </label>
-        <mat-form-field appearance="outline" >
-            <input matInput formControlName="name" placeholder="Placeholder">
+<div class="custom-accordion">
+    <br><br><br>
+    <form [formGroup]="myForm" class="mainData">
+        <div class="basicData">
+            <label>Nombre </label>
+            <mat-form-field appearance="outline">
+                <input matInput formControlName="name" placeholder="Placeholder">
                 <mat-icon matSuffix>delete</mat-icon>
             </mat-form-field>
         </div>
-        <div class="mainData">
+        <div class="basicData">
             <label>Apellido 1 </label>
-            <mat-form-field appearance="outline" >
+            <mat-form-field appearance="outline">
                 <input matInput formControlName="surname1" placeholder="Placeholder">
                 <mat-icon matSuffix>delete</mat-icon>
             </mat-form-field>
         </div>
-        <div class="mainData">
+        <div class="basicData">
             <label>Apellido 2 </label>
             <mat-form-field appearance="outline">
                 <input matInput formControlName="surname2" placeholder="Placeholder">
@@ -23,11 +24,15 @@
             </mat-form-field>
         </div>
     </form>
-    <div class="dataContainer">
-        <mat-accordion>
-            <div *ngFor="let item of formData">
-                <app-form-card #coso [titles]="item.title" [formData]="item.data" [responses]="item.responses" [ampliable]="item.ampliable" ></app-form-card>
-            </div>
-        </mat-accordion> 
-    </div>
+</div>
+<div class="custom-accordion">
+    <mat-accordion style="max-width: 800px; width: 100%;" [multi]="true">
+        <div *ngFor="let item of formData" class="dataContainer">
+            <app-form-card #coso [titles]="item.header" [formData]="item.titles" [responses]="item.responses"
+                [ampliable]="item.ampliable"></app-form-card>
+        </div>
+    </mat-accordion>
+</div>
+<div class="custom-accordion" style="margin: 20px;">
     <button mat-raised-button type="button" (click)="enviarEvento()">Mostrar pdf</button>
+</div>
