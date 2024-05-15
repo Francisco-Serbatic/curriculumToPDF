@@ -3,6 +3,7 @@ import { Datos, DatosImpl } from "../../models/datos"
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PdfCreatorService } from 'src/app/services/pdf-creator.service';
 import { FormCardComponent } from 'src/app/components/form-card/form-card.component';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-main-page',
@@ -11,7 +12,6 @@ import { FormCardComponent } from 'src/app/components/form-card/form-card.compon
 })
 export class MainPageComponent implements OnInit {
   myForm: FormGroup;
-  @ViewChildren ('coso') datosDesdeElPadre: QueryList<FormCardComponent>
   formData: DatosImpl[] = [
     DatosImpl.crearDatos("Datos Personales", [
       'Consejo:',
@@ -50,6 +50,8 @@ export class MainPageComponent implements OnInit {
       false
     ),
   ]
+  @ViewChildren ('coso') datosDesdeElPadre: QueryList<FormCardComponent>
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(private fb: FormBuilder, private pdfGenerator: PdfCreatorService) { }
 

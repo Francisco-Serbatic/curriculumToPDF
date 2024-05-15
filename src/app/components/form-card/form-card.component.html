@@ -7,6 +7,7 @@
         </mat-panel-description>
     </mat-expansion-panel-header>
     <form [formGroup]="myForm" style="position: relative;">
+
         <mat-grid-list cols="2" rowHeight="100px" formArrayName="groupArray" class="hflexcenter">
             <div *ngFor="let input of groupArrayControls; let i = index">
                 <mat-grid-tile *ngIf="i !=0 && i%formData.length==0"><mat-divider></mat-divider></mat-grid-tile>

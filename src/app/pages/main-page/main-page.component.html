@@ -26,6 +26,10 @@
     </form>
 </div>
 <div class="custom-accordion">
+    <div class="example-action-buttons">
+        <button mat-button (click)="accordion.openAll()">Expand All</button>
+        <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+      </div>
     <mat-accordion style="max-width: 800px; width: 100%;" [multi]="true">
         <div *ngFor="let item of formData" class="dataContainer">
             <app-form-card #coso [titles]="item.header" [formData]="item.titles" [responses]="item.responses"
