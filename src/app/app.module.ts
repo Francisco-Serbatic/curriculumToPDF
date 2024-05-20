@@ -2,6 +2,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http';
 
 // Angular Material
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -33,6 +34,7 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule, 
+    HttpClientModule,
     ReactiveFormsModule,
     MatExpansionModule,
     MatFormFieldModule,

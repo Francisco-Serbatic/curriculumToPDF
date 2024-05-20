@@ -13,6 +13,11 @@ import { MatAccordion } from '@angular/material/expansion';
 export class MainPageComponent implements OnInit {
   myForm: FormGroup;
   formData: DatosImpl[] = [
+    DatosImpl.crearDatos("Datos Básicos", [
+      'Nombre: ',
+      'Primer Apellido: ',
+      'Segundo Apellido'
+    ], false),
     DatosImpl.crearDatos("Datos Personales", [
       'Consejo:',
       'Clan:',
