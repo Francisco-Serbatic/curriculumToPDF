@@ -1,28 +1,35 @@
 <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
         <mat-panel-title>
-            {{titles}}
+            {{header}}
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>
     </mat-expansion-panel-header>
+
     <form [formGroup]="myForm" style="position: relative;">
-
-        <mat-grid-list cols="2" rowHeight="100px" formArrayName="groupArray" class="hflexcenter">
-            <div *ngFor="let input of groupArrayControls; let i = index">
-                <mat-grid-tile *ngIf="i !=0 && i%formData.length==0"><mat-divider></mat-divider></mat-grid-tile>
-                <mat-grid-tile *ngIf="i !=0 && i%formData.length==0 && formData.length%2==0"></mat-grid-tile>
-
-                <mat-grid-tile [formGroupName]="i" class="tasks-container">
-                    <label>{{formData[ubicator(i)]}}</label>
-                    <mat-form-field appearance="outline">
-                        <input matInput placeholder="Placeholder" #inputs formControlName="input">
-                    </mat-form-field>
-                </mat-grid-tile>
-            </div>
-        </mat-grid-list>
+        <div formArrayName="groupArray">
+            <mat-grid-list *ngFor="let input of groupArrayControls; let i = index" cols="2" rowHeight="100px"
+                class="hflexcenter">
+                <div [formGroupName]="i">
+                    <mat-grid-tile *ngFor="let item of getFormGroupControls(); let j = index" class="tasks-container">
+                        <label>{{titles[j]}}</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Placeholder" #inputs formControlName="{{item}}">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [colspan]="getDeleteBtnColspan()" class="deleteBtn">
+                        <button *ngIf="ampliable" mat-icon-button (click)="deleteFormGroup(i)">
+                            <mat-icon color="warn">delete</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+                </div>
+                <mat-divider></mat-divider>
+            </mat-grid-list>
+        </div>
     </form>
+
     <div *ngIf="ampliable" style="display: flex; justify-content: center;">
-        <button mat-mini-fab  color="primary" (click)="setInputs()"><mat-icon>add</mat-icon></button>
+        <button mat-icon-button color="primary" (click)="addFormGroup()"><mat-icon>add</mat-icon></button>
     </div>
 </mat-expansion-panel>

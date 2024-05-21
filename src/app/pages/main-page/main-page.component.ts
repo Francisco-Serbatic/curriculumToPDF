@@ -58,13 +58,14 @@ export class MainPageComponent implements OnInit {
   @ViewChildren ('coso') datosDesdeElPadre: QueryList<FormCardComponent>
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  constructor(private fb: FormBuilder, private pdfGenerator: PdfCreatorService) { }
+  constructor(private fb: FormBuilder, private pdfGenerator: PdfCreatorService) {
+    console.log(this.formData[1])
+   }
 
-  // todo: Poner datos clave bien.
 
   enviarEvento() {
     this.datosDesdeElPadre.forEach((value, index) => {
-      this.formData[index].responses = value.cositas();
+      this.formData[index].responses = value.getFormData();
     });
     this.mostrarDatos();
   }
@@ -79,7 +80,6 @@ export class MainPageComponent implements OnInit {
 
   mostrarDatos() {
     this.pdfGenerator.createpdf(this.formData);
-    // this.pdfGenerator.createpdf1()
   }
 
 }

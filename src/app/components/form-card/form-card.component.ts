@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, MaxValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, MaxValidator, Validators, AbstractControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-form-card',
@@ -8,67 +10,75 @@ import { FormBuilder, FormGroup, FormArray, FormControl, MaxValidator } from '@a
 })
 export class FormCardComponent implements OnInit {
   myForm: FormGroup;
-  @Input() titles: string = "";
-  @Input() formData: string[] = [];
-  @Input() responses: string[] = [];
+  inputsGroup: FormGroup;
+
+  @Input() header: string = "";
+  @Input() titles: string[] = [];
   @Input() ampliable: boolean = false;
-  @Input() eventoPdf: boolean = false;
 
   @ViewChildren('inputs') inputs!: QueryList<ElementRef>;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.myForm = new FormGroup({
-      groupArray: new FormArray([])
-    });
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog) {
+
   }
 
   ngOnInit(): void {
-    this.setInputs();
+    this.myForm = this.formBuilder.group({
+      groupArray: this.formBuilder.array([])
+    });
+    this.inputsGroup = this.createForm();
+    this.addFormGroup();
   }
 
+  getDeleteBtnColspan(): number {
+    return (this.titles.length%2 == 0) ? 2 : 1;
+  }
+
+  addFormGroup() {
+    const newFormGroup = this.createForm();
+    this.groupArray.push(newFormGroup);
+  }
+
+  deleteFormGroup(index: number) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+
+    dialogRef.afterClosed().subscribe((close) => {
+      if (close)
+        this.groupArray.removeAt(index)
+    });
+  }
+
+  createForm(): FormGroup {
+    const group = {};
+    this.titles.forEach((field, index) => {
+      group[field] = ['', Validators.required];
+    });
+    return this.formBuilder.group(group);
+  }
+
+  getFormGroupControls() {
+    return Object.keys(this.inputsGroup.controls);
+  }
+
+  public getFormData(): string[] {
+    //console.log(((this.myForm.get('groupArray') as FormArray).controls as FormGroup[])[0].controls)
+    const formDataArray: string[] = [];
+    (this.myForm.get('groupArray') as FormArray).controls.map((group: AbstractControl) => {
+      const formGroup = group as FormGroup;
+      Object.keys(formGroup.controls).forEach(key => {
+        formDataArray.push(formGroup.get(key)?.value)
+      });
+     
+    });
+    return formDataArray;
+    
+  }
+
+  get groupArray(): FormArray {
+    return this.myForm.get('groupArray') as FormArray;
+  }
   get groupArrayControls() {
     return (this.myForm.get('groupArray') as FormArray).controls;
   }
 
-  setInputs() {
-    for (let form in this.formData)
-      {
-        this.addNewInput()
-      }
-  }
-
-  addNewInput() {
-    var inputsArray = (this.myForm.get('groupArray') as FormArray);
-    const newGroup = new FormGroup({
-      input: new FormControl('')
-    });
-    inputsArray.push(newGroup);
-  }
-
-  public cositas(): string[] {
-    const formDataArray: string[] = (this.myForm.get('groupArray') as FormArray).value.map((item: any) => item.input);
-    // this.responses.forEach((data, index) => {
-    //   formDataArray.push(this.groupArrayControls[index].value);
-    // });
-    return formDataArray
-  }
-
-  updateFormDataArray() {
-    const formDataArray: string[] = (this.myForm.get('groupArray') as FormArray).value.map((item: any) => item.input);
-    this.responses = [];
-    this.responses.forEach((data, index) => {
-      formDataArray.push(this.groupArrayControls[index].value);
-    });
-    this.responses = formDataArray;
-  }
-
-  ubicator(index: number): number {
-    const maxNumber = this.formData.length;
-    while (index>=maxNumber)
-      {
-        index = index - maxNumber;
-      }
-    return index
-  }
-  
 }

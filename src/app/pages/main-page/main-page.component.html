@@ -31,8 +31,8 @@
         <button mat-button (click)="accordion.closeAll()">Collapse All</button>
       </div>
     <mat-accordion style="max-width: 800px; width: 100%;" [multi]="true">
-        <div *ngFor="let item of formData" class="dataContainer">
-            <app-form-card #coso [titles]="item.header" [formData]="item.titles" [responses]="item.responses"
+        <div *ngFor="let item of formData; let i = index" class="dataContainer">
+            <app-form-card #coso [header]="item.header" [titles]="item.titles"
                 [ampliable]="item.ampliable"></app-form-card>
         </div>
     </mat-accordion>
