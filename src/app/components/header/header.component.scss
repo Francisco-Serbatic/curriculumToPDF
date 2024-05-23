@@ -1,0 +1,15 @@
+header {
+    background-color: lightblue;
+}
+.image-tile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Oculta cualquier contenido que se desborde */
+  }
+  
+  .image-tile img {
+    width: 100%; /* La imagen ocupa el 100% del ancho del contenedor */
+    height: auto; /* La altura se ajusta automáticamente para mantener la proporción */
+    object-fit: cover; /* La imagen se recorta para llenar el contenedor manteniendo su proporción */
+  }

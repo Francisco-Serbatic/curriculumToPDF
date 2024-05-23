@@ -25,18 +25,19 @@
         </div>
     </form>
 </div> -->
-<div class="custom-accordion">
+<div #dataContainer class="custom-accordion">
     <div class="example-action-buttons">
         <button mat-button (click)="accordion.openAll()">Expand All</button>
         <button mat-button (click)="accordion.closeAll()">Collapse All</button>
       </div>
     <mat-accordion style="max-width: 800px; width: 100%;" [multi]="true">
         <div *ngFor="let item of formData; let i = index" class="dataContainer">
-            <app-form-card #coso [header]="item.header" [titles]="item.titles"
+            <app-form-card #accordionCard [header]="item.header" [titles]="item.titles"
                 [ampliable]="item.ampliable"></app-form-card>
         </div>
     </mat-accordion>
 </div>
 <div class="custom-accordion" style="margin: 20px;">
-    <button mat-raised-button type="button" (click)="enviarEvento()">Mostrar pdf</button>
+    <button id="showPdf" mat-raised-button type="button" (click)="enviarEvento()">Mostrar pdf</button>
 </div>
+<button mat-fab (click)="scrolltoPdfMaker()" class="scroll-button"><mat-icon>arrow_downward</mat-icon></button>

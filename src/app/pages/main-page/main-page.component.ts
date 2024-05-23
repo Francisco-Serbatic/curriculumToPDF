@@ -1,9 +1,10 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { Datos, DatosImpl } from "../../models/datos"
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PdfCreatorService } from 'src/app/services/pdf-creator.service';
 import { FormCardComponent } from 'src/app/components/form-card/form-card.component';
 import { MatAccordion } from '@angular/material/expansion';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-main-page',
@@ -55,10 +56,12 @@ export class MainPageComponent implements OnInit {
       false
     ),
   ]
-  @ViewChildren ('coso') datosDesdeElPadre: QueryList<FormCardComponent>
-  @ViewChild(MatAccordion) accordion: MatAccordion;
 
-  constructor(private fb: FormBuilder, private pdfGenerator: PdfCreatorService) {
+  @ViewChildren ('accordionCard') datosDesdeElPadre: QueryList<FormCardComponent>
+  @ViewChild(MatAccordion) accordion: MatAccordion;
+  @ViewChild('showPdf') showPdf!: ElementRef;
+
+  constructor(private fb: FormBuilder, private pdfGenerator: PdfCreatorService, private scroller: ViewportScroller) {
     console.log(this.formData[1])
    }
 
@@ -80,6 +83,10 @@ export class MainPageComponent implements OnInit {
 
   mostrarDatos() {
     this.pdfGenerator.createpdf(this.formData);
+  }
+
+  scrolltoPdfMaker() {
+    this.scroller.scrollToAnchor("showPdf");
   }
 
 }

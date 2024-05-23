@@ -1,1 +1,18 @@
-<p>header works!</p>
+<header>
+    <mat-grid-list cols="10" rowHeight="100px" gutterSize="16px">
+        <mat-grid-tile [colspan]="2" [rowspan]="1" class="image-tile">
+            <img src="./../../../assets/serbatic.png">
+        </mat-grid-tile>
+
+        <mat-grid-tile [colspan]="5">
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-icon>person</mat-icon>
+        </mat-grid-tile><mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-icon>logout</mat-icon>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-icon>settings</mat-icon>
+        </mat-grid-tile>
+    </mat-grid-list>
+</header>

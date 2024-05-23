@@ -1,8 +1,10 @@
 
 export class Table {
-    widths: any[]
+    widths: any[];
     body: any[];
+    unbreakable: boolean;
     constructor() {
-        this.body = []
+        this.body = [];
+        this.unbreakable = true;
      }
 }
