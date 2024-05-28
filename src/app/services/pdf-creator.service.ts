@@ -15,9 +15,7 @@ export class PdfCreatorService {
 
   constructor(private imageService: ImageService) { }
 
-  // TODO: Estilizar
-  // TODO: En los apartados: Poner columnas, en la primera columna titulo en la segunda tablas de datos.
-  // TODO: Ver si lo puedes sacar en funciones más txikitas
+  
   createpdf(arrayData: DatosImpl[]) {
     const imageUrl = '../../assets/serbatic.png';
     var content: any = [];
@@ -30,7 +28,7 @@ export class PdfCreatorService {
         var table = new Table();
         let row = []
 
-        table.widths = [160, '*', '*']
+        table.widths = [160, 120, '*']
 
         if (datosImpl.responses.length > 0) {
           row.push(this.generatePdfSection(datosImpl.header, "section", datosImpl.titles.length))
@@ -39,7 +37,6 @@ export class PdfCreatorService {
 
             if (titleIndex >= datosImpl.titles.length && datosImpl.titles.length % index == 0) {
               row.push(' ')
-              row.push('');
               row.push('');
               table.body.push(row);
               row = []
@@ -50,8 +47,12 @@ export class PdfCreatorService {
             if (index != 0) {
               row.push('')
             }
-            row.push(this.generatePdfText(datosImpl.titles[titleIndex], "text"));
-            row.push(this.generatePdfText(response, "text"));
+            var fillColor = ""
+            if (index%2==0) {
+              fillColor = "#f9f9f7"
+            }
+            row.push(this.generatePdfText(datosImpl.titles[titleIndex], "title", fillColor));
+            row.push(this.generatePdfText(response, "text", fillColor));
             table.body.push(row);
             row = [];
           })
@@ -81,10 +82,15 @@ export class PdfCreatorService {
       footer: pdfFooter,
       styles: {
         headerClass: {
-
+          fontSize: 25,
+          bold: true,
+          alignment: 'left',
+          color: '#5f5f5f',
+          width: '*',
+          margin: [15, 0, 5, 0]
         },
         header: {
-          fontSize: 22,
+          fontSize: 30,
           bold: true,
           alignment: 'left',
           width: '*',
@@ -94,9 +100,13 @@ export class PdfCreatorService {
           fontSize: 18,
           alignment: "right",
           bold: true,
+          color: '#86ccb3',
           margin: [5, 0, 15, 0]
         },
         text: {
+          fontSize: 11
+        },
+        title: {
           fontSize: 12,
           alignment: "left",
           bold: true
@@ -137,7 +147,7 @@ export class PdfCreatorService {
           },
           {
             text: "V1 - Developer",
-            style: 'header'
+            style: 'headerClass'
           }
         ]
       ]
@@ -194,9 +204,9 @@ export class PdfCreatorService {
     }
   }
 
-  private generatePdfText(text: string, style: string): any {
+  private generatePdfText(text: string, style: string, fillColor: string): any {
     return {
-      text: text, style: style
+      text: text, style: style, fillColor: fillColor
     }
   }
 

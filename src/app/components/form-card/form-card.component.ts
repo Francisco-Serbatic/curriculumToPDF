@@ -51,7 +51,7 @@ export class FormCardComponent implements OnInit {
   createForm(): FormGroup {
     const group = {};
     this.titles.forEach((field, index) => {
-      group[field] = ['', Validators.required];
+      group[field] = ['Ejemplo', Validators.required];
     });
     return this.formBuilder.group(group);
   }
